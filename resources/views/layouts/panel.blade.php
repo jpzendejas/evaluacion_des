@@ -14,9 +14,44 @@
   <!-- Icons -->
   <link href="{{asset('vendor/nucleo/css/nucleo.css')}}" rel="stylesheet">
   <link href="{{asset('vendor/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
+  <!-- EasyuiStyles -->
+  <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/bootstrap/easyui.css">
+  <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/icon.css">
+  <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/color.css">
+  <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/demo/demo.css">
+
   <!-- Argon CSS -->
   <link type="text/css" href="{{asset('css/argon.css?v=1.0.0')}}" rel="stylesheet">
   <link type="text/css" href="{{asset('js/toastr.min.css')}}" rel="stylesheet">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
+  <script>
+       $.extend($.fn.datagrid.defaults, {
+         loader: function(param, success, error){
+           var opts = $(this).datagrid('options');
+           if (!opts.url) return false;
+
+           $.ajaxSetup({
+               headers: {
+                   'X-CSRF-Token': $('input[name="_token"]').val()
+               }
+           })
+           $.ajax({
+             type: opts.method,
+             url: opts.url,
+             data: param,
+             dataType: 'json',
+             success: function(data){
+               success(data);
+             },
+             error: function(){
+               error.apply(this, arguments);
+             }
+           });
+         }
+         })
+
+       </script>
 
 </head>
 
@@ -136,7 +171,8 @@
   </div>
   <!-- Argon Scripts -->
   <!-- Core -->
-  <script src="{{asset('vendor/jquery/dist/jquery.min.js')}}"></script>
+
+  <!-- <script src="{{asset('vendor/jquery/dist/jquery.min.js')}}"></script> -->
   <script src="{{asset('vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
   <!-- Optional JS -->
   <script src="{{asset('vendor/chart.js/dist/Chart.min.js')}}"></script>
@@ -144,7 +180,7 @@
   <!-- Argon JS -->
   <script src="{{asset('js/argon.js?v=1.0.0')}}"></script>
   <script src="{{asset('js/toastr.min.js')}}"></script>
-
+  <script src="{{asset('js/questions.js')}}"></script>
 </body>
 
 </html>
