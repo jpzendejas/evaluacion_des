@@ -32,4 +32,8 @@ Route::get('/evaluacion_desempeño','PerfomanceIndicatorsController@index');
 Route::get('/employees_evaluation','PerfomanceIndicatorsController@employees_evaluations');
 Route::get('/evaluacion/{token}','PerfomanceIndicatorsController@evaluaciones');
 Route::post('/guardar_resultados','PerfomanceIndicatorsController@save_results');
+//Questions Crud
 Route::get('/preguntas','QuestionController@index');
+Route::post('/obtener_preguntas','QuestionController@get_questions');
+Route::post('/save_question','QuestionController@save_questions');
+Route::post('/update_question/{id}','QuestionController@update_questions');
