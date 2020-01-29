@@ -181,6 +181,7 @@
   <script src="{{asset('js/argon.js?v=1.0.0')}}"></script>
   <script src="{{asset('js/toastr.min.js')}}"></script>
   <script src="{{asset('js/questions.js')}}"></script>
+  <script src="{{asset('js/answers.js')}}"></script>
 </body>
 
 </html>

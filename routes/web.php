@@ -37,3 +37,9 @@ Route::get('/preguntas','QuestionController@index');
 Route::post('/obtener_preguntas','QuestionController@get_questions');
 Route::post('/save_question','QuestionController@save_questions');
 Route::post('/update_question/{id}','QuestionController@update_questions');
+
+//Answers Crud
+Route::get('/respuestas','AnswerController@index');
+Route::post('/obtener_respuestas','AnswerController@get_answers');
+Route::post('/save_answer','AnswerController@save_answers');
+Route::post('/update_answer/{id}','AnswerController@update_answers');

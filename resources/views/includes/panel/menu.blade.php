@@ -32,6 +32,11 @@ Menú
     </a>
   </li>
   <li class="nav-item">
+    <a class="nav-link" href="{{url('/respuestas')}}">
+      <i class="ni ni-bullet-list-67 text-orange"></i>Respuestas
+    </a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link" href="{{url('/get_pre_users')}}">
       <i class="ni ni-ruler-pencil text-red"></i> Evaluaciones
     </a>
