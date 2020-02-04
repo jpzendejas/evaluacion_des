@@ -42,6 +42,11 @@ Menú
     </a>
   </li>
   <li class="nav-item">
+    <a class="nav-link" href="{{url('/dependencias')}}">
+      <i class="ni ni-building text-yellow"></i>Dependencias
+    </a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link" href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('formLogout').submit();">
       <i class="ni ni-key-25 text-info"></i>Cerrar sesíon
     </a>

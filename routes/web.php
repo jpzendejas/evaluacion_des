@@ -43,3 +43,9 @@ Route::get('/respuestas','AnswerController@index');
 Route::post('/obtener_respuestas','AnswerController@get_answers');
 Route::post('/save_answer','AnswerController@save_answers');
 Route::post('/update_answer/{id}','AnswerController@update_answers');
+
+//GovernmentAgency Crud
+Route::get('/dependencias', 'GovernmentAgencyController@index');
+Route::post('/get_governmentagency', 'GovernmentAgencyController@get_governmentagencies');
+Route::post('/save_governmentagency','GovernmentAgencyController@save_governmentagencies');
+Route::post('/update_governmentagency/{id}','GovernmentAgencyController@update_governmentagencies');
