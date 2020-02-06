@@ -49,3 +49,12 @@ Route::get('/dependencias', 'GovernmentAgencyController@index');
 Route::post('/get_governmentagency', 'GovernmentAgencyController@get_governmentagencies');
 Route::post('/save_governmentagency','GovernmentAgencyController@save_governmentagencies');
 Route::post('/update_governmentagency/{id}','GovernmentAgencyController@update_governmentagencies');
+
+//Employee Crud
+Route::get('/empleados', 'EmployeeController@index');
+Route::post('/obtener_empleados','EmployeeController@get_employees');
+Route::post('/get_department','EmployeeController@get_departments');
+Route::post('/get_parent_token','EmployeeController@get_parent_tokens');
+Route::post('/save_employee','EmployeeController@save_employees');
+Route::post('/update_employee/{id}','EmployeeController@update_employees');
+Route::post('destroy_employee/','EmployeeController@destroy_employees');

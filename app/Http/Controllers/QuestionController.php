@@ -12,7 +12,7 @@ class QuestionController extends Controller
     }
 
     public function get_questions(Request $request){
-      $page= isset($_POST['page']) ? intval($_POST['page']):1;
+    $page= isset($_POST['page']) ? intval($_POST['page']):1;
      $rows= isset($_POST['rows']) ? intval($_POST['rows']):10;
      $offset = ($page-1)*$rows;
      $sql="select count(*) from questions";

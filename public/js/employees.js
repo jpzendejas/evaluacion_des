@@ -1,17 +1,39 @@
 $(document).ready(function(){
   var url;
 
-  var newEployee = function(){
+  var newEmployee = function(){
       $('#dlg').dialog('open').dialog('center').dialog('setTitle','Nuevo Empleado');
       $('#fm').form('clear');
-      url = 'save_employee';
+      $('#government_agency_id').combobox({
+        url:'/get_department',
+        valueField:'id',
+        textField:'government_agency'
+      });
+      $('#parent_token').combobox({
+        url:'/get_parent_token',
+        valueField:'token',
+        textField:'token'
+      });
+    url = 'save_employee';
   }
 
-  var editEployee=function(){
+  var editEmployee=function(){
       var row = $('#dg').datagrid('getSelected');
       if (row){
           $('#dlg').dialog('open').dialog('center').dialog('setTitle','Editar Empleado');
           $('#fm').form('load',row);
+          $('#government_agency_id').combobox({
+            url:'/get_department',
+            valueField:'id',
+            textField:'government_agency',
+            value:row.government_agency_id
+          });
+          $('#parent_token').combobox({
+            url:'/get_parent_token',
+            valueField:'token',
+            textField:'token',
+            value:row.parent_token
+          });
           url = 'update_employee/'+row.id;
       }
   }
@@ -42,7 +64,7 @@ $(document).ready(function(){
   var destroyEmployee=function(){
       var row = $('#dg').datagrid('getSelected');
       if (row){
-          $.messager.confirm('Evaluacion Desempeño','Eliminar Pregunta?',function(r){
+          $.messager.confirm('Evaluacion Desempeño','Eliminar Empleado?',function(r){
               if (r){
                   $.post('destroy_employee',{id:row.id},function(result){
                       if (result.success){
@@ -59,7 +81,7 @@ $(document).ready(function(){
       }
   }
 $('#newEmployee').on('click', newEmployee);
-$('#saveEployeee').on('click', saveEmployee);
+$('#saveEmployee').on('click', saveEmployee);
 $('#editEmployee').on('click', editEmployee);
 $('#destroyEmployee').on('click', destroyEmployee);
 
