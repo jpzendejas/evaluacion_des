@@ -58,3 +58,9 @@ Route::post('/get_parent_token','EmployeeController@get_parent_tokens');
 Route::post('/save_employee','EmployeeController@save_employees');
 Route::post('/update_employee/{id}','EmployeeController@update_employees');
 Route::post('destroy_employee/','EmployeeController@destroy_employees');
+
+//Results Data
+Route::get('/resultados','ResultController@index');
+Route::post('/obtener_resultados','ResultController@get_results');
+Route::get('import', 'ResultController@import');
+Route::post('/import_data','ResultController@import_data_gob')->name('import_data');

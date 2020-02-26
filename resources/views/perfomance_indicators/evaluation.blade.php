@@ -52,7 +52,7 @@
               </div>
               @endforeach
               <div class="text-center">
-                <button type="submit" class="btn btn-primary mt-4">Realizar Trámite en Linea</button>
+                <button type="submit" class="btn btn-primary mt-4">Realizar Evaluación al Desempeño</button>
               </div>
             </div>
           </form>

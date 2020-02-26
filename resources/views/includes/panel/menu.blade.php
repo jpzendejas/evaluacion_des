@@ -20,7 +20,7 @@ Menú
   @else
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" href="/">
+      <a class="nav-link" href="{{url('/evaluacion_desempeño')}}">
         <i class="ni ni-tv-2 text-red"></i> Inicio
       </a>
     </li>
@@ -49,6 +49,11 @@ Menú
   <li class="nav-item">
     <a class="nav-link" href="{{url('/empleados')}}">
       <i class="ni ni-single-02 text-blue"></i>Empleados
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{url('/resultados')}}">
+      <i class="ni ni-check-bold text-red"></i>Resultados
     </a>
   </li>
   <li class="nav-item">
@@ -92,12 +97,12 @@ Menú
       <ul class="navbar-nav mb-md-3">
         <li class="nav-item">
           <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html">
-            <i class="ni ni-collection text-yellow"></i> Frecuencia tramites
+            <i class="ni ni-collection text-yellow"></i> Reporte 1
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html">
-            <i class="ni ni-spaceship text-red"></i> Tramites no finalizados
+            <i class="ni ni-spaceship text-red"></i> Reporte 2
           </a>
         </li>
 

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Sistema de Reserva de Citas | {{config('app.name')}}</title>
+  <title>Evaluación al Desempeño | Salamanca, Gto</title>
   <!-- Favicon -->
   <link href="{{asset('img/brand/favicon.png')}}" rel="icon" type="image/png">
   <!-- Fonts -->
@@ -184,6 +184,8 @@
   <script src="{{asset('js/answers.js')}}"></script>
   <script src="{{asset('js/governmentagencies.js')}}"></script>
   <script src="{{asset('js/employees.js')}}"></script>
+  <script src="{{asset('js/results.js')}}"></script>
+
 
 </body>
 

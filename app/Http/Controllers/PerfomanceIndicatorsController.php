@@ -24,7 +24,9 @@ class PerfomanceIndicatorsController extends Controller
       $this->validate($request, $rules);
       $parent_tokent = $request->token;
       $government_agency_id = $request->government_agency_id;
-      $evaluate_employees = Employee::orderBy('id')->where([['parent_token', $parent_tokent],['government_agency_id',$government_agency_id]])->get();
+      // $evaluate_employees = Employee::orderBy('id')->where([['parent_token', $parent_tokent],['government_agency_id',$government_agency_id]])->get();
+      $evaluate_employees = Employee::where([['parent_token','=',$parent_tokent],['government_agency_id','=',$government_agency_id]])->doesntHave('')->get();
+
       return view('perfomance_indicators.employee_list', compact('evaluate_employees', $evaluate_employees));
 
 
