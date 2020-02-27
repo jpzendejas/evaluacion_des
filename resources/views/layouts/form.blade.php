@@ -94,7 +94,7 @@
       <div class="row align-items-center justify-content-xl-between">
         <div class="col-xl-6">
           <div class="copyright text-center text-xl-left text-muted">
-            &copy; 2019 <a href="/" class="font-weight-bold ml-1" target="_blank">Evaluación al Desempeño Salamanca, Gto.</a>
+            &copy; 2020 Evaluación al Desempeño Salamanca, Gto.
           </div>
         </div>
         <div class="col-xl-6">
@@ -103,7 +103,7 @@
               <a href="/" class="nav-link"></a>
             </li>
             <li class="nav-item">
-              <a href="" class="nav-link" target="_blank">DGTI</a>
+              <a href="http://www.salamanca.gob.mx" class="nav-link" target="_blank">DGTI</a>
             </li>
           </ul>
         </div>
