@@ -64,3 +64,4 @@ Route::get('/resultados','ResultController@index');
 Route::post('/obtener_resultados','ResultController@get_results');
 Route::get('import', 'ResultController@import');
 Route::post('/import_data','ResultController@import_data_gob')->name('import_data');
+Route::post('/get_department','ResultController@get_departments');

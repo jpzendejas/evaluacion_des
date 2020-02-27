@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Employee;
 use App\Imports\EmployeeImport;
 use App\Imports\GovernmentAgencyImport;
+use App\GovernmentAgency;
 
 use DB;
 
@@ -18,6 +19,8 @@ class ResultController extends Controller
     public function get_results(Request $request){
       $page= isset($_POST['page']) ? intval($_POST['page']):1;
        $rows= isset($_POST['rows']) ? intval($_POST['rows']):10;
+       $government_agency_id = $request->government_agency_id;
+
        $offset = ($page-1)*$rows;
        $sql="select count(*) from employees";
 
@@ -30,14 +33,24 @@ class ResultController extends Controller
        $rs=mysqli_query($connection,$sql);
        $row=mysqli_fetch_row($rs);
        $result["total"]= $row[0];
+       if ($government_agency_id != '') {
+         $employees = DB::table('employees')
+                          ->join('government_agencies','employees.government_agency_id','=','government_agencies.id')
+                          ->join('employee_question_answers','employees.id','=','employee_question_answers.employee_id')
+                          ->join('answers','answers.id','=','employee_question_answers.answer_id')
+                          ->join('questions','questions.id','=','employee_question_answers.question_id')
+                          ->join('perfomance_indicators','perfomance_indicators.id','=','questions.perfomance_indicator_id')
+                          ->select('employees.*','government_agencies.government_agency','answers.*','perfomance_indicators.*',DB::raw('SUM(answer_value) total'), DB::raw('SUM(CASE WHEN perfomance_indicators.performance_indicator = "Productividad" THEN answer_value ELSE 0 END) as productividad'),DB::raw('SUM(CASE WHEN perfomance_indicators.performance_indicator = "Planificación" THEN answer_value ELSE 0 END) planificacion'),DB::raw('SUM(CASE WHEN perfomance_indicators.performance_indicator = "Liderazgo" THEN answer_value ELSE 0 END) liderazgo'))->where('employees.government_agency_id',$government_agency_id)->groupBy('employees.employee_name')->skip($offset)->take($rows)->get();
+       }else {
+         $employees = DB::table('employees')
+         ->join('government_agencies','employees.government_agency_id','=','government_agencies.id')
+         ->join('employee_question_answers','employees.id','=','employee_question_answers.employee_id')
+         ->join('answers','answers.id','=','employee_question_answers.answer_id')
+         ->join('questions','questions.id','=','employee_question_answers.question_id')
+         ->join('perfomance_indicators','perfomance_indicators.id','=','questions.perfomance_indicator_id')
+         ->select('employees.*','government_agencies.government_agency','answers.*','perfomance_indicators.*',DB::raw('SUM(answer_value) total'), DB::raw('SUM(CASE WHEN perfomance_indicators.performance_indicator = "Productividad" THEN answer_value ELSE 0 END) as productividad'),DB::raw('SUM(CASE WHEN perfomance_indicators.performance_indicator = "Planificación" THEN answer_value ELSE 0 END) planificacion'),DB::raw('SUM(CASE WHEN perfomance_indicators.performance_indicator = "Liderazgo" THEN answer_value ELSE 0 END) liderazgo'))->groupBy('employees.employee_name')->skip($offset)->take($rows)->get();
+       }
        //$employees=Employee::with(['government_agency'])->orderBy('id','asc')->skip($offset)->take($rows)->get();
-       $employees = DB::table('employees')
-                        ->join('government_agencies','employees.government_agency_id','=','government_agencies.id')
-                        ->join('employee_question_answers','employees.id','=','employee_question_answers.employee_id')
-                        ->join('answers','answers.id','=','employee_question_answers.answer_id')
-                        ->join('questions','questions.id','=','employee_question_answers.question_id')
-                        ->join('perfomance_indicators','perfomance_indicators.id','=','questions.perfomance_indicator_id')
-                        ->select('employees.*','government_agencies.government_agency','answers.*','perfomance_indicators.*',DB::raw('SUM(answer_value) total'), DB::raw('SUM(CASE WHEN perfomance_indicators.performance_indicator = "Productividad" THEN answer_value ELSE 0 END) as productividad'),DB::raw('SUM(CASE WHEN perfomance_indicators.performance_indicator = "Planificación" THEN answer_value ELSE 0 END) planificacion'),DB::raw('SUM(CASE WHEN perfomance_indicators.performance_indicator = "Liderazgo" THEN answer_value ELSE 0 END) liderazgo'))->groupBy('employees.employee_name')->skip($offset)->take($rows)->get();
        $items=array();
        foreach($employees as $employee){
          array_push($items, $employee);
@@ -62,5 +75,10 @@ class ResultController extends Controller
        $data = \Excel::import(new GovernmentAgencyImport,$path);
        //Excel::import(new PropiertyImport,request()->file('file'));
        return back();
+     }
+
+     public function get_departments(Request $request){
+       $departments = GovernmentAgency::orderBy('government_agency')->get();
+       echo json_encode($departments);
      }
 }

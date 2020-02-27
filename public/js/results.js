@@ -46,4 +46,27 @@ $(document).ready(function(){
             }}
         ]]
       });
+
+      $('#dept').combobox({
+        url:'/get_department',
+        valueField:'id',
+        textField:'government_agency',
+        onChange:function(rec){
+          doSearch(rec);
+        }
+      });
+
+      function doSearch(rec){
+        $('#dgr').datagrid('load',{
+          government_agency_id:$('#dept').val()
+        }).datagrid('Footer', [{itemid:'TotalPrice',listprice:'123'}]);
+
+      }
+
+      var exportResults = function(){
+        $('#dgr').datagrid('print','resultados');
+      }
+
+      $('#exportResults').on('click', exportResults);
+
     });

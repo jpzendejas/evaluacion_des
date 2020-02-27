@@ -25,6 +25,8 @@
   <link type="text/css" href="{{asset('js/toastr.min.css')}}" rel="stylesheet">
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
+  <script type="text/javascript" src="https://www.jeasyui.com/easyui/datagrid-export.js"></script>
+
   <script>
        $.extend($.fn.datagrid.defaults, {
          loader: function(param, success, error){

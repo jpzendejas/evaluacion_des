@@ -36,11 +36,11 @@ Menú
       <i class="ni ni-bullet-list-67 text-orange"></i>Respuestas
     </a>
   </li>
-  <li class="nav-item">
+  <!-- <li class="nav-item">
     <a class="nav-link" href="{{url('/get_pre_users')}}">
       <i class="ni ni-ruler-pencil text-red"></i> Evaluaciones
     </a>
-  </li>
+  </li> -->
   <li class="nav-item">
     <a class="nav-link" href="{{url('/dependencias')}}">
       <i class="ni ni-building text-yellow"></i>Dependencias

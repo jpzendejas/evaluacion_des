@@ -21,9 +21,11 @@
         </thead> -->
     </table>
     <div id="toolbar">
-        <a id ="newAnswer" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true">Ver Evaluación</a>
-        <a id ="editAnswer" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-print" plain="true"></a>
+        <!-- <a id ="newAnswer" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true">Ver Evaluación</a> -->
         <!-- <a id ="destroyQuestion" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true">Eliminar Pregunta</a> -->
+        <span><strong>Departamento:</strong></span>
+        <input id="dept" name="dept">
+        <a id ="exportResults" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-print" plain="true"></a>
     </div>
   <div id="dlg" class="easyui-dialog" style="width:400px"
             closed="true" buttons="#dlg-buttons">
