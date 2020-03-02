@@ -28,7 +28,7 @@ Menú
   <!-- Inicio Menu -->
   <li class="nav-item">
     <a class="nav-link" href="{{url('/preguntas')}}">
-      <i class="ni ni-single-02 text-orange"></i>Preguntas
+      <i class="ni ni-sound-wave text-orange"></i>Preguntas
     </a>
   </li>
   <li class="nav-item">
