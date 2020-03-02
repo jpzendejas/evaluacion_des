@@ -134,7 +134,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-search"></i></span>
               </div>
-              <input class="form-control" placeholder="Search" type="text">
+              <input class="form-control" id="buscar" placeholder="Buscar" type="text">
             </div>
           </div>
         </form>

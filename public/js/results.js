@@ -66,7 +66,13 @@ $(document).ready(function(){
       var exportResults = function(){
         $('#dgr').datagrid('print','resultados');
       }
+      var searchData = function(){
+        $('#dgr').datagrid('load',{
+          search:$('#buscar').val()
+        }).datagrid('Footer', [{itemid:'TotalPrice',listprice:'123'}]);
+      }
 
       $('#exportResults').on('click', exportResults);
+      $('#buscar').on('keyup', searchData);
 
     });
