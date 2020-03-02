@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Employee extends Model
 {
-    protected $fillable = ['token','employee_name','government_agency_id','parent_token'];
+    protected $fillable = ['token','employee_name','government_agency_id','parent_token','email'];
     public function government_agency(){
       return $this->belongsTo('App\GovernmentAgency');
     }

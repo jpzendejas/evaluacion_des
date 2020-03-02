@@ -36,7 +36,7 @@
                   @foreach($question->answers as $key => $answer)
                   @if($key == 0)
                   <div class="custom-control custom-radio mb-3">
-                  <input name="{{$question->id}}" value="{{$answer->answer->id}}" class="custom-control-input" id="rb{{$question->id}}{{$answer->answer->id}}" checked="" type="radio" required>
+                  <input name="{{$question->id}}" value="{{$answer->answer->id}}" class="custom-control-input" id="rb{{$question->id}}{{$answer->answer->id}}" type="radio" required>
                   <label class="custom-control-label" for="rb{{$question->id}}{{$answer->answer->id}}">{{$answer->answer->answer}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                   </div>
                   @else

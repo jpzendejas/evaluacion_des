@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\GovernmentAgency;
 use App\Employee;
+use App\Mail\NuevaEvaluacion;
 use App\Question;
 use App\QuestionAnswer;
 use App\EmployeeQuestionAnswer;
+use Mail;
 
 class PerfomanceIndicatorsController extends Controller
 {
@@ -26,7 +28,7 @@ class PerfomanceIndicatorsController extends Controller
       $government_agency_id = $request->government_agency_id;
       $evaluated_employees = EmployeeQuestionAnswer::groupBy('employee_id')->pluck('employee_id')->toArray();
       // $evaluate_employees = Employee::orderBy('id')->where([['parent_token', $parent_tokent],['government_agency_id',$government_agency_id]])->get();
-      $evaluate_employees = Employee::where([['parent_token','=',$parent_tokent],['government_agency_id','=',$government_agency_id]])->whereNotIn('id',$evaluated_employees)->get();
+      $evaluate_employees = Employee::whereNotIn('id',$evaluated_employees)->where([['parent_token','=',$parent_tokent],['government_agency_id','=',$government_agency_id]])->get();
 
       return view('perfomance_indicators.employee_list', compact('evaluate_employees', $evaluate_employees));
 
@@ -56,6 +58,9 @@ class PerfomanceIndicatorsController extends Controller
         $result->answer_id = $request->$question_id;
         $result->save();
       }
+      //here go email director
+      $user_email=Employee::where([['government_agency_id', $employee->government_agency_id],['email','<>','null']])->first();
+      Mail::to($user_email->email)->send(new NuevaEvaluacion($employee));
       return redirect('/evaluacion_desempeño');
     }
 }

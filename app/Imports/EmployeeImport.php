@@ -19,6 +19,7 @@ class EmployeeImport implements ToModel
           'employee_name'=>$row[1],
           'government_agency_id'=>$row[2],
           'parent_token'=>$row[3],
+          'email'=>$row[4],
         ]);
     }
 }
