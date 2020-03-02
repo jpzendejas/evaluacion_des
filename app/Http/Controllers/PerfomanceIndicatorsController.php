@@ -21,16 +21,25 @@ class PerfomanceIndicatorsController extends Controller
     public function employees_evaluations(Request $request){
       $rules = [
         'government_agency_id'=>'required',
-        'token'=>'required|min:4|max:4'
+        'token'=>'required|min:3|max:4'
       ];
       $this->validate($request, $rules);
       $parent_tokent = $request->token;
       $government_agency_id = $request->government_agency_id;
       $evaluated_employees = EmployeeQuestionAnswer::groupBy('employee_id')->pluck('employee_id')->toArray();
       // $evaluate_employees = Employee::orderBy('id')->where([['parent_token', $parent_tokent],['government_agency_id',$government_agency_id]])->get();
-      $evaluate_employees = Employee::whereNotIn('id',$evaluated_employees)->where([['parent_token','=',$parent_tokent],['government_agency_id','=',$government_agency_id]])->get();
+      $evaluate_employees = Employee::whereNotIn('id',$evaluated_employees)->where('parent_token','=',$parent_tokent)->get();
 
-      return view('perfomance_indicators.employee_list', compact('evaluate_employees', $evaluate_employees));
+      $notification = array(
+        'message' =>'Sin empleados para evaluar: ',
+        'alert-type' => 'error'
+      );
+      if ($evaluate_employees->count() > 0) {
+        return view('perfomance_indicators.employee_list', compact('evaluate_employees', $evaluate_employees));
+      }else {
+        return back()->with($notification);
+      }
+
 
 
     }
@@ -47,7 +56,7 @@ class PerfomanceIndicatorsController extends Controller
 
     public function save_results(Request $request){
       $rules = [
-        'employee_token'=>'required|min:4|max:4'
+        'employee_token'=>'required|min:3|max:4'
       ];
       $employee = Employee::where('token', $request->employee_token)->first();
       $question_ids = Question::orderBy('id')->pluck('id')->toArray();
@@ -58,9 +67,16 @@ class PerfomanceIndicatorsController extends Controller
         $result->answer_id = $request->$question_id;
         $result->save();
       }
+      $notification = array(
+        'message' =>'Evaluación creada correctamente',
+        'alert-type' => 'success'
+      );
       //here go email director
       $user_email=Employee::where([['government_agency_id', $employee->government_agency_id],['email','<>','null']])->first();
-      Mail::to($user_email->email)->send(new NuevaEvaluacion($employee));
-      return redirect('/evaluacion_desempeño');
+      if ($user_email->count() > 0) {
+        Mail::to($user_email->email)->send(new NuevaEvaluacion($employee));
+      }
+      return redirect('/evaluacion_desempeño')->with($notification);
+
     }
 }

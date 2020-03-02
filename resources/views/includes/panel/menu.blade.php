@@ -96,12 +96,12 @@ Menú
       <h6 class="navbar-heading text-muted">Reportes</h6>
       <ul class="navbar-nav mb-md-3">
         <li class="nav-item">
-          <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html">
+          <a class="nav-link" href="/">
             <i class="ni ni-collection text-yellow"></i> Reporte 1
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html">
+          <a class="nav-link" href="/">
             <i class="ni ni-spaceship text-red"></i> Reporte 2
           </a>
         </li>
