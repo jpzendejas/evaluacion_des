@@ -21,7 +21,7 @@ class PerfomanceIndicatorsController extends Controller
     public function employees_evaluations(Request $request){
       $rules = [
         'government_agency_id'=>'required',
-        'token'=>'required|min:3|max:4'
+        'token'=>'required|min:2|max:4'
       ];
       $this->validate($request, $rules);
       $parent_tokent = $request->token;
@@ -31,7 +31,7 @@ class PerfomanceIndicatorsController extends Controller
       $evaluate_employees = Employee::whereNotIn('id',$evaluated_employees)->where('parent_token','=',$parent_tokent)->get();
 
       $notification = array(
-        'message' =>'Sin empleados para evaluar: ',
+        'message' =>'Sin empleados para evaluar',
         'alert-type' => 'error'
       );
       if ($evaluate_employees->count() > 0) {
