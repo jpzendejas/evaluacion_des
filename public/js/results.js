@@ -48,7 +48,7 @@ $(document).ready(function(){
       });
 
       $('#dept').combobox({
-        url:'/get_department',
+        url:'get_department',
         valueField:'id',
         textField:'government_agency',
         onChange:function(rec){
