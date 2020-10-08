@@ -72,10 +72,10 @@ class PerfomanceIndicatorsController extends Controller
         'alert-type' => 'success'
       );
       //here go email director
-      $user_email=Employee::where([['government_agency_id', $employee->government_agency_id],['email','<>','null']])->first();
-      if ($user_email->count() > 0) {
-        Mail::to($user_email->email)->send(new NuevaEvaluacion($employee));
-      }
+      // $user_email=Employee::where([['government_agency_id', $employee->government_agency_id],['email','<>','null']])->first();
+      // if ($user_email->count() > 0) {
+      //   Mail::to($user_email->email)->send(new NuevaEvaluacion($employee));
+      // }
       return redirect('/evaluacion_desempeño')->with($notification);
 
     }

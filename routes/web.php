@@ -61,7 +61,9 @@ Route::post('destroy_employee/','EmployeeController@destroy_employees');
 
 //Results Data
 Route::get('/resultados','ResultController@index');
+Route::get('/descargar_resultados','ResultController@result_downlad');
 Route::post('/obtener_resultados','ResultController@get_results');
 Route::get('import', 'ResultController@import');
 Route::post('/import_data','ResultController@import_data')->name('import_data');
 Route::post('/get_department','ResultController@get_departments');
+Route::post('/download_result','ResultController@download_results');

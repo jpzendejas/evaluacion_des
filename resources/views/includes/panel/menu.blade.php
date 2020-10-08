@@ -57,6 +57,11 @@ Menú
     </a>
   </li>
   <li class="nav-item">
+    <a class="nav-link" href="{{url('/descargar_resultados')}}">
+      <i class="ni ni-paper-diploma text-blue"></i>Exportar Resultados
+    </a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link" href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('formLogout').submit();">
       <i class="ni ni-key-25 text-info"></i>Cerrar sesíon
     </a>

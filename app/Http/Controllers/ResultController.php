@@ -7,6 +7,7 @@ use App\Employee;
 use App\Imports\EmployeeImport;
 use App\Imports\GovernmentAgencyImport;
 use App\GovernmentAgency;
+use PDF;
 
 use DB;
 
@@ -93,5 +94,27 @@ class ResultController extends Controller
      public function get_departments(Request $request){
        $departments = GovernmentAgency::orderBy('government_agency')->get();
        echo json_encode($departments);
+     }
+
+     public function result_downlad(){
+       $departments = GovernmentAgency::orderBy('id')->get();
+       return view('results.download', compact('departments'));
+     }
+
+     public function download_results(Request $request){
+       if ($request) {
+         $government_agency_id = $request->government_agency_id;
+         $government_agency = GovernmentAgency::where('id', $government_agency_id)->first();
+         $employees = DB::table('employees')
+                          ->join('government_agencies','employees.government_agency_id','=','government_agencies.id')
+                          ->join('employee_question_answers','employees.id','=','employee_question_answers.employee_id')
+                          ->join('answers','answers.id','=','employee_question_answers.answer_id')
+                          ->join('questions','questions.id','=','employee_question_answers.question_id')
+                          ->join('perfomance_indicators','perfomance_indicators.id','=','questions.perfomance_indicator_id')
+                          ->select('employees.*','government_agencies.government_agency','answers.*','perfomance_indicators.*',DB::raw('SUM(answer_value) total'), DB::raw('SUM(CASE WHEN perfomance_indicators.performance_indicator = "Productividad" THEN answer_value ELSE 0 END) as productividad'),DB::raw('SUM(CASE WHEN perfomance_indicators.performance_indicator = "Planificación" THEN answer_value ELSE 0 END) planificacion'),DB::raw('SUM(CASE WHEN perfomance_indicators.performance_indicator = "Liderazgo" THEN answer_value ELSE 0 END) liderazgo'))->where('employees.government_agency_id',$government_agency_id)->groupBy('employees.employee_name')->get();
+
+                $pdf = PDF::loadView('results.downloadPDF', compact('employees','government_agency'));
+                return $pdf->download('Resultados.pdf');
+       }
      }
 }
